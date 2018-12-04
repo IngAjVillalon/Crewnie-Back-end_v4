@@ -1,0 +1,28 @@
+"use strict";
+exports.__esModule = true;
+var user_controller_1 = require("./user.controller");
+var controller = new user_controller_1["default"]();
+var express = require('express');
+var auth_service_1 = require("../../auth/auth.service");
+var auth = new auth_service_1["default"]();
+var router = express.Router();
+var validate = require('express-validation');
+var validators_1 = require("../../validators");
+// router.get('/search/:q', controller.index);
+router.get('/profile', auth.isAuthenticated(), controller.profile);
+router.get('/id/:id', auth.hasRoles(['SA', 'Admin']), controller.get);
+router.post('/password/reset', controller.resetPassword);
+router.put('/password/update', auth.isAuthenticated(), controller.changePassword);
+router.put('/id/:id', auth.isAuthenticated(), controller.update);
+router.post('/email', validate(validators_1["default"].emailSignup), auth.attachUserInfo(), controller.emailSignUp);
+router.post('/phone', validate(validators_1["default"].phoneSignup), auth.attachUserInfo(), controller.phoneSignUp);
+// router.post('/reset/:token', controller.reset);
+router.get('/a/', auth.hasRoles(['SA', 'Admin']), controller.getUsersByPhoneByAdmin);
+router.post('/a', auth.hasRoles(['SA', 'Admin']), controller.addUserByAdmin);
+router.put('/a/:id', auth.hasRoles(['SA', 'Admin']), controller.updateUserByAdmin);
+router.get('/sa', auth.hasRoles(['SA']), controller.getUsersSA);
+router.get('/sa/:id', auth.hasRoles(['SA']), controller.get);
+router.put('/sa/:id', auth.hasRoles(['SA']), controller.update);
+router.post('/sa/:id', auth.hasRoles(['SA']), controller.insert);
+module.exports = router;
+//# sourceMappingURL=index.js.map
