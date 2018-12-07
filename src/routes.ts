@@ -15,7 +15,9 @@ export default function (app: express.Express) {
   app.use('/api/coupons', require('./api/coupon'));
   app.use('/api/feedbacks', require('./api/feedback'));
   app.use('/api/notices', require('./api/noticeboard'));
+
   app.use('/api/projects', require('./api/project'));
+
   app.use('/api/depertments', require('./api/depertments'));
 
   app.use('/api/users', require('./api/user'));

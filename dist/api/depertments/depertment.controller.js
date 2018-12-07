@@ -70,6 +70,44 @@ var ProjectCtrl = /** @class */ (function (_super) {
                 .exec()
                 .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
         };
+        _this.getDepertmentsByProject = function (req, res) {
+            var slug = req.params.slug;
+            var search = req.query.search;
+            var sort = req.query.sort;
+            var skip = parseInt(req.query.skip);
+            var limit = parseInt(req.query.limit);
+            req.query.where = {};
+            // SEARCH IN NAME
+            if (search) {
+                req.query.where = {
+                    $and: [
+                        { $projectId: { $search: search } },
+                    ]
+                };
+            }
+            // SEARCH BY CAT AND SUB CAT
+            if (slug) {
+                var slugRegExp = new RegExp(slug, "ig");
+                req.query.where = {
+                    $or: [
+                        { categories: { $regex: slugRegExp } },
+                        { tags: { $regex: slugRegExp } }
+                    ]
+                };
+            }
+            // Exclude child products
+            // console.log('-----', req.query.where)
+            // req.query.where.isChild = false;
+            depertment_model_1["default"]
+                .find(req.query.where)
+                .limit(limit)
+                .skip(skip)
+                .sort(sort)
+                .populate('children', '-tags -categories')
+                //   .select(select)
+                .exec()
+                .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
+        };
         return _this;
     }
     return ProjectCtrl;

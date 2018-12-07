@@ -3,7 +3,8 @@ import { string, boolean } from 'joi';
 const ObjectId = Schema.Types.ObjectId;
 
 export const Depertment = new Schema({
-    title: {type: String},
+    projectId: { type: String },
+    title: { type: String },
     teamLeader: {type: Object},
     members:  { type: Object},
 

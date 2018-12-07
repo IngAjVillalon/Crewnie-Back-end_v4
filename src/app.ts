@@ -13,7 +13,7 @@ const config = new Config();
 import setRoutes from './routes';
 // import socketServer from './socket-server';
 const app = express();
-app.set('port', (3000));
+app.set('port', (4000));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

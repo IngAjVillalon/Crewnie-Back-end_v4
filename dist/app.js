@@ -15,7 +15,7 @@ var routes_1 = require("./routes");
 // import socketServer from './socket-server';
 var app = express();
 exports.app = app;
-app.set('port', (3000));
+app.set('port', (4000));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

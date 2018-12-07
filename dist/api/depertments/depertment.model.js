@@ -3,6 +3,7 @@ exports.__esModule = true;
 var mongoose_1 = require("mongoose");
 var ObjectId = mongoose_1.Schema.Types.ObjectId;
 exports.Depertment = new mongoose_1.Schema({
+    projectId: { type: String },
     title: { type: String },
     teamLeader: { type: Object },
     members: { type: Object },

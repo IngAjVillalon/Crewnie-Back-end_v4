@@ -12,6 +12,7 @@ router.post('/', controller.insert);
 router.get('/', controller.getDepertments);
 // Get Single Project
 router.get('/:id', controller.get);
+router.get('/project/:id', controller.getDepertmentsByProject);
 router.post('/user', auth.isAuthenticated(), controller.saveUserFeedback);
 // router.get('/', auth.hasRoles(['Admin', 'SA']), controller.getAdminFeedbacks);
 // router.post('/', auth.hasRoles(['Admin', 'SA']), controller.insert);
