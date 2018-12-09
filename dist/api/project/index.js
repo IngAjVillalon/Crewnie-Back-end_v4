@@ -8,6 +8,7 @@ var auth_service_1 = require("../../auth/auth.service");
 var auth = new auth_service_1["default"]();
 // Add project to db
 router.post('/', controller.insert);
+router.put('/:id', controller.updateProjectById);
 router.post('/groups', controller.insert);
 // Get All Projects
 router.get('/', controller.getProjects);

@@ -85,4 +85,16 @@ export default class ProjectCtrl extends BaseCtrl {
             .then(this.respondWithResult(res))
             .catch(this.handleError(res));
     }
+
+    updateProjectById = (req, res) => {
+
+        ProjectSchema.findOne({
+            _id: req.params.id
+        })
+        .exec()
+        .then(this.handleEntityNotFound(res))
+        .then(this.patchUpdates(req.body))
+        .then(this.respondWithResult(res))
+        .catch(this.handleError(res));
+    }
 }

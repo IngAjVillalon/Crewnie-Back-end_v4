@@ -84,6 +84,15 @@ var ProjectCtrl = /** @class */ (function (_super) {
                 .exec()
                 .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
         };
+        _this.updateProjectById = function (req, res) {
+            project_model_1["default"].findOne({
+                _id: req.params.id
+            })
+                .exec()
+                .then(_this.handleEntityNotFound(res))
+                .then(_this.patchUpdates(req.body))
+                .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
+        };
         return _this;
     }
     return ProjectCtrl;

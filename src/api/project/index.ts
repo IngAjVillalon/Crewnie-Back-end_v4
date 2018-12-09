@@ -7,6 +7,7 @@ let auth = new AuthService();
 
 // Add project to db
 router.post('/', controller.insert);
+router.put('/:id', controller.updateProjectById);
 router.post('/groups', controller.insert);
 
 // Get All Projects
