@@ -6,6 +6,7 @@ var express = require("express");
 var morgan = require("morgan");
 var mongoose = require("mongoose");
 var http = require("http");
+var cors = require('cors');
 // const express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
@@ -18,8 +19,11 @@ exports.app = app;
 app.set('port', (4000));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser({ limit: '50mb' }));
 app.use(cookieParser());
 app.use(morgan('dev'));
+app.use(cors());
+app.options('*', cors());
 app.use(session({
     resave: false,
     saveUninitialized: true,

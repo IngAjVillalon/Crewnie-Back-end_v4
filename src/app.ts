@@ -5,6 +5,8 @@ import * as morgan from 'morgan';
 import * as mongoose from 'mongoose';
 import * as path from 'path';
 import * as http from 'http';
+
+const cors = require('cors');
 // const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser')
@@ -17,9 +19,13 @@ app.set('port', (4000));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser({limit: '50mb'}));
 
 app.use(cookieParser());
 app.use(morgan('dev'));
+app.use(cors());
+app.options('*', cors());
+
 
 app.use(session({
   resave: false,
