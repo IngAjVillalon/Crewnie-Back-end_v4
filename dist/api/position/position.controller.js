@@ -11,27 +11,27 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var base_1 = require("../base");
-var project_model_1 = require("./project.model");
+var position_model_1 = require("./position.model");
 var ProjectCtrl = /** @class */ (function (_super) {
     __extends(ProjectCtrl, _super);
     function ProjectCtrl() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.model = project_model_1["default"];
+        _this.model = position_model_1["default"];
         _this.saveUserFeedback = function (req, res) {
-            var feedback = req.body;
-            feedback.user = req.user._id;
-            var newFeedback = new project_model_1["default"](feedback);
-            newFeedback.save()
+            var depertment = req.body;
+            depertment.user = req.user._id;
+            var newDepertment = new position_model_1["default"](depertment);
+            newDepertment.save()
                 .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
         };
         _this.getAdminFeedbacks = function (req, res) {
-            project_model_1["default"].find()
+            position_model_1["default"].find()
                 .populate('user', 'displayName eamil phoneNumber createdAt')
                 .exec()
                 .then(_this.handleEntityNotFound(res))
                 .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
         };
-        _this.getProjects = function (req, res) {
+        _this.getDepertments = function (req, res) {
             var slug = req.params.slug;
             var search = req.query.search;
             var sort = req.query.sort;
@@ -60,7 +60,7 @@ var ProjectCtrl = /** @class */ (function (_super) {
             // Exclude child products
             // console.log('-----', req.query.where)
             // req.query.where.isChild = false;
-            project_model_1["default"]
+            position_model_1["default"]
                 .find(req.query.where)
                 .limit(limit)
                 .skip(skip)
@@ -70,14 +70,13 @@ var ProjectCtrl = /** @class */ (function (_super) {
                 .exec()
                 .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
         };
-        _this.getProjectsByCreator = function (req, res) {
-            var creatorId = req.params.id;
+        _this.getPositionsByDepartment = function (req, res) {
+            var departmentId = req.params.id;
             var sort = req.query.sort;
             var skip = parseInt(req.query.skip);
             var limit = parseInt(req.query.limit);
-            console.log(creatorId);
-            project_model_1["default"]
-                .find({ 'creatorId': creatorId })
+            position_model_1["default"]
+                .find({ 'departmentId': departmentId })
                 .limit(limit)
                 .skip(skip)
                 .sort(sort)
@@ -89,4 +88,4 @@ var ProjectCtrl = /** @class */ (function (_super) {
     return ProjectCtrl;
 }(base_1["default"]));
 exports["default"] = ProjectCtrl;
-//# sourceMappingURL=project.controller.js.map
+//# sourceMappingURL=position.controller.js.map

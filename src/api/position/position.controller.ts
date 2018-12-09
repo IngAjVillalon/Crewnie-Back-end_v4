@@ -1,21 +1,21 @@
 import BaseCtrl from "../base";
-import Depertment from './depertment.model';
+import Position from './position.model';
 
 export default class ProjectCtrl extends BaseCtrl {
-    model = Depertment;
+    model = Position;
 
     saveUserFeedback = (req, res) => {
         var depertment = req.body;
         depertment.user = req.user._id;
 
-        let newDepertment = new Depertment(depertment);
+        let newDepertment = new Position(depertment);
         newDepertment.save()
             .then(this.respondWithResult(res))
             .catch(this.handleError(res))
     }
 
     getAdminFeedbacks = (req, res) => {
-        Depertment.find()
+        Position.find()
             .populate('user', 'displayName eamil phoneNumber createdAt')
             .exec()
             .then(this.handleEntityNotFound(res))
@@ -56,7 +56,7 @@ export default class ProjectCtrl extends BaseCtrl {
         // console.log('-----', req.query.where)
 
         // req.query.where.isChild = false;
-        Depertment
+        Position
             .find(req.query.where)
             .limit(limit)
             .skip(skip)
@@ -68,46 +68,19 @@ export default class ProjectCtrl extends BaseCtrl {
             .catch(this.handleError(res));
     }
 
-    getDepertmentsByProject = (req, res) => {
-        let slug = req.params.slug;
+    getPositionsByDepartment = (req, res) => {
+        let departmentId = req.params.id;
 
-        let search = req.query.search;
         let sort = req.query.sort;
         let skip = parseInt(req.query.skip);
         let limit = parseInt(req.query.limit);
 
-        req.query.where = {};
 
-        // SEARCH IN NAME
-        if (search) {
-            req.query.where = {
-                $and: [
-                    { $projectId: { $search: search } },
-                    // { name: { $regex: search, $options: 'i' } }
-                ]
-            }
-        }
-        // SEARCH BY CAT AND SUB CAT
-        if (slug) {
-            const slugRegExp = new RegExp(slug, "ig")
-            req.query.where = {
-                $or: [
-                    { categories: { $regex: slugRegExp } },
-                    { tags: { $regex: slugRegExp } }
-                ]
-            }
-        }
-        // Exclude child products
-        // console.log('-----', req.query.where)
-
-        // req.query.where.isChild = false;
-        Depertment
-            .find(req.query.where)
+        Position
+            .find({'departmentId': departmentId})
             .limit(limit)
             .skip(skip)
             .sort(sort)
-            .populate('children', '-tags -categories')
-            //   .select(select)
             .exec()
             .then(this.respondWithResult(res))
             .catch(this.handleError(res));

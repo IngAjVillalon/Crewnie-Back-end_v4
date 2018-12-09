@@ -1,4 +1,4 @@
-import DepertmentCtrl from './depertment.controller';
+import DepertmentCtrl from './department.controller';
 const controller = new DepertmentCtrl();
 var express = require('express');
 var router = express.Router();
@@ -10,6 +10,7 @@ router.post('/', controller.insert);
 
 // Get All Projects
 router.get('/', controller.getDepertments);
+router.get('/project/:projectId', controller.getDepertmentsByProject);
 
 // Get Single Project
 router.get('/:id', controller.get);

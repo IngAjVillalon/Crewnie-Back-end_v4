@@ -3,6 +3,7 @@ exports.__esModule = true;
 var mongoose_1 = require("mongoose");
 var ObjectId = mongoose_1.Schema.Types.ObjectId;
 exports.ProjectSchema = new mongoose_1.Schema({
+    creatorId: { type: String },
     private: { type: Boolean },
     title: { type: String },
     type: { type: String },

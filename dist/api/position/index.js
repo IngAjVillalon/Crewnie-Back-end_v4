@@ -1,25 +1,20 @@
 "use strict";
 exports.__esModule = true;
-var project_controller_1 = require("./project.controller");
-var controller = new project_controller_1["default"]();
+var position_controller_1 = require("./position.controller");
+var controller = new position_controller_1["default"]();
 var express = require('express');
 var router = express.Router();
 var auth_service_1 = require("../../auth/auth.service");
 var auth = new auth_service_1["default"]();
 // Add project to db
 router.post('/', controller.insert);
-router.post('/groups', controller.insert);
 // Get All Projects
-router.get('/', controller.getProjects);
-router.get('/creator/:id', controller.getProjectsByCreator);
-router.get('/id/:id', controller.get);
-// Get Department By Project ID
-// Get Position By Department ID
-// Add Position To Department
-// Add User To Position
+router.get('/', controller.getDepertments);
+// router.get('/project/:projectId', controller.getDepertmentsByProject);
 // Get Single Project
-// router.get('/:id', controller.get);
-// router.post('/user', auth.isAuthenticated(), controller.saveUserFeedback);
+router.get('/:id', controller.get);
+router.get('/department/:id', controller.getPositionsByDepartment);
+router.post('/user', auth.isAuthenticated(), controller.saveUserFeedback);
 // router.get('/', auth.hasRoles(['Admin', 'SA']), controller.getAdminFeedbacks);
 // router.post('/', auth.hasRoles(['Admin', 'SA']), controller.insert);
 // router.get('/:id', controller.get);

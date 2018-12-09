@@ -17,8 +17,8 @@ export default function (app: express.Express) {
   app.use('/api/notices', require('./api/noticeboard'));
 
   app.use('/api/projects', require('./api/project'));
-
   app.use('/api/depertments', require('./api/depertments'));
+  app.use('/api/position', require('./api/position'));
 
   app.use('/api/users', require('./api/user'));
   app.use('/auth', require('./auth'));

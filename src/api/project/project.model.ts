@@ -3,6 +3,8 @@ import { string, boolean } from 'joi';
 const ObjectId = Schema.Types.ObjectId;
 
 export const ProjectSchema = new Schema({
+    creatorId: { type: String},
+
     private: {type: Boolean},
     title: {type: String},
     type:  { type: String },
@@ -15,6 +17,7 @@ export const ProjectSchema = new Schema({
     coverPhotoUrl: { type: String},
     depertments: [ String ],
     positions: [ String ],
+
 
     createdAt: { type: Date, default: Date.now },
     createdBy: { type: ObjectId, ref: 'User' },
