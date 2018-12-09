@@ -17,9 +17,7 @@ export const ProjectSchema = new Schema({
     hasUnion: { type: Boolean},
     unions: [ String],
 
-    depertments: [ String ],
     departments: { type: Object },
-    positions: [ String ],
 
 
     createdAt: { type: Date, default: Date.now },
