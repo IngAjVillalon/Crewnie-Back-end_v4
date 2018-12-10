@@ -7,6 +7,7 @@ export const Depertment = new Schema({
     title: { type: String },
     teamLeader: {type: Object},
     members:  { type: Object},
+    positions: { type: Object},
 
     createdAt: { type: Date, default: Date.now },
     createdBy: { type: ObjectId, ref: 'User' },

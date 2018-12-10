@@ -85,4 +85,33 @@ export default class ProjectCtrl extends BaseCtrl {
             .then(this.respondWithResult(res))
             .catch(this.handleError(res));
     }
+
+    getDepertmentById = (req, res) => {
+        let Id = req.params.Id;
+
+        let sort = req.query.sort;
+        let skip = parseInt(req.query.skip);
+        let limit = parseInt(req.query.limit);
+
+
+        Depertment
+            .find({'_id': Id})
+            .limit(limit)
+            .skip(skip)
+            .sort(sort)
+            .exec()
+            .then(this.respondWithResult(res))
+            .catch(this.handleError(res));
+    }
+
+    updateDepartmentById = (req, res) => {
+        Depertment.findOne({
+            _id: req.params.id
+        })
+        .exec()
+        .then(this.handleEntityNotFound(res))
+        .then(this.patchUpdates(req.body))
+        .then(this.respondWithResult(res))
+        .catch(this.handleError(res));
+    }
 }

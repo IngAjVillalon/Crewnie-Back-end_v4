@@ -83,6 +83,28 @@ var ProjectCtrl = /** @class */ (function (_super) {
                 .exec()
                 .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
         };
+        _this.getDepertmentById = function (req, res) {
+            var Id = req.params.Id;
+            var sort = req.query.sort;
+            var skip = parseInt(req.query.skip);
+            var limit = parseInt(req.query.limit);
+            department_model_1["default"]
+                .find({ '_id': Id })
+                .limit(limit)
+                .skip(skip)
+                .sort(sort)
+                .exec()
+                .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
+        };
+        _this.updateDepartmentById = function (req, res) {
+            department_model_1["default"].findOne({
+                _id: req.params.id
+            })
+                .exec()
+                .then(_this.handleEntityNotFound(res))
+                .then(_this.patchUpdates(req.body))
+                .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
+        };
         return _this;
     }
     return ProjectCtrl;

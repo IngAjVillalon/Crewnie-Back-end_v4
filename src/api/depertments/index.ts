@@ -25,6 +25,6 @@ router.post('/user', auth.isAuthenticated(), controller.saveUserFeedback);
 // router.post('/', auth.hasRoles(['Admin', 'SA']), controller.insert);
 
 // router.get('/:id', controller.get);
-router.put('/:id', controller.update);
+router.put('/:id', controller.updateDepartmentById);
 
 module.exports = router;

@@ -7,6 +7,7 @@ exports.Depertment = new mongoose_1.Schema({
     title: { type: String },
     teamLeader: { type: Object },
     members: { type: Object },
+    positions: { type: Object },
     createdAt: { type: Date, "default": Date.now },
     createdBy: { type: ObjectId, ref: 'User' },
     updatedAt: { type: Date, "default": Date.now },
