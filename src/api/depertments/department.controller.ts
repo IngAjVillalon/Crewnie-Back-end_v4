@@ -23,6 +23,14 @@ export default class ProjectCtrl extends BaseCtrl {
             .catch(this.handleError(res));
     }
 
+    insertAllDepartments = (req, res) => {
+        let departments = req.body;
+
+        Depertment.insertMany(departments)
+            .then(this.respondWithResult(res))
+            .catch(this.handleError(res));
+    }
+
     getDepertments = (req, res) => {
         let slug = req.params.slug;
 
@@ -114,4 +122,5 @@ export default class ProjectCtrl extends BaseCtrl {
         .then(this.respondWithResult(res))
         .catch(this.handleError(res));
     }
+
 }

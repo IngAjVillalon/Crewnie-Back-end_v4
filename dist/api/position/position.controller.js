@@ -31,6 +31,11 @@ var ProjectCtrl = /** @class */ (function (_super) {
                 .then(_this.handleEntityNotFound(res))
                 .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
         };
+        _this.insertAllPositions = function (req, res) {
+            var positions = req.body;
+            position_model_1["default"].insertMany(positions)
+                .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
+        };
         _this.getDepertments = function (req, res) {
             var slug = req.params.slug;
             var search = req.query.search;
@@ -77,6 +82,19 @@ var ProjectCtrl = /** @class */ (function (_super) {
             var limit = parseInt(req.query.limit);
             position_model_1["default"]
                 .find({ 'departmentId': departmentId })
+                .limit(limit)
+                .skip(skip)
+                .sort(sort)
+                .exec()
+                .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
+        };
+        _this.getPositionsByIdList = function (req, res) {
+            var positionList = req.body;
+            var sort = req.query.sort;
+            var skip = parseInt(req.query.skip);
+            var limit = parseInt(req.query.limit);
+            position_model_1["default"]
+                .find({ '_id': { $in: positionList } })
                 .limit(limit)
                 .skip(skip)
                 .sort(sort)

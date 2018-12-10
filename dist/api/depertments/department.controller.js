@@ -31,6 +31,11 @@ var ProjectCtrl = /** @class */ (function (_super) {
                 .then(_this.handleEntityNotFound(res))
                 .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
         };
+        _this.insertAllDepartments = function (req, res) {
+            var departments = req.body;
+            department_model_1["default"].insertMany(departments)
+                .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
+        };
         _this.getDepertments = function (req, res) {
             var slug = req.params.slug;
             var search = req.query.search;

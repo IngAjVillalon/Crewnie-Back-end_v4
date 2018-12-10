@@ -23,6 +23,14 @@ export default class ProjectCtrl extends BaseCtrl {
             .catch(this.handleError(res));
     }
 
+    insertAllPositions = (req, res) => {
+        let positions = req.body;
+
+        Position.insertMany(positions)
+            .then(this.respondWithResult(res))
+            .catch(this.handleError(res));
+    }
+
     getDepertments = (req, res) => {
         let slug = req.params.slug;
 
@@ -77,7 +85,7 @@ export default class ProjectCtrl extends BaseCtrl {
 
 
         Position
-            .find({'departmentId': departmentId})
+            .find({ 'departmentId': departmentId })
             .limit(limit)
             .skip(skip)
             .sort(sort)
@@ -86,15 +94,35 @@ export default class ProjectCtrl extends BaseCtrl {
             .catch(this.handleError(res));
     }
 
+    getPositionsByIdList = (req, res) => {
+        let positionList = req.body;
+
+        let sort = req.query.sort;
+        let skip = parseInt(req.query.skip);
+        let limit = parseInt(req.query.limit);
+
+
+        Position
+            .find({ '_id': { $in : positionList} })
+            .limit(limit)
+            .skip(skip)
+            .sort(sort)
+            .exec()
+            .then(this.respondWithResult(res))
+            .catch(this.handleError(res));
+
+
+    }
+
     updatePositionById = (req, res) => {
 
         Position.findOne({
             _id: req.params.id
         })
-        .exec()
-        .then(this.handleEntityNotFound(res))
-        .then(this.patchUpdates(req.body))
-        .then(this.respondWithResult(res))
-        .catch(this.handleError(res));
+            .exec()
+            .then(this.handleEntityNotFound(res))
+            .then(this.patchUpdates(req.body))
+            .then(this.respondWithResult(res))
+            .catch(this.handleError(res));
     }
 }
