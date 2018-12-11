@@ -110,6 +110,21 @@ var ProjectCtrl = /** @class */ (function (_super) {
                 .then(_this.patchUpdates(req.body))
                 .then(_this.respondWithResult(res))["catch"](_this.handleError(res));
         };
+        _this.updateAllPositionsByDepartmentId = function (req, res) {
+            var positions = req.body;
+            var positionIds = [];
+            positions.forEach(function (element) {
+                positionIds.push(element._id);
+                position_model_1["default"].update({ "_id": element._id }, element, function () { });
+            });
+            res.send('return');
+            console.log(positionIds);
+            // Position.updateMany({"_id": { $in: positionIds}}, positions, { multi: true }).exec().then(this.respondWithResult(res));
+            // Position.updateMany({}, positions)
+            // .exec()
+            // .then(this.respondWithResult(res))
+            // .catch(this.handleError(res));
+        };
         return _this;
     }
     return ProjectCtrl;

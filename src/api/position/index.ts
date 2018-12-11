@@ -8,6 +8,7 @@ let auth = new AuthService();
 // Add project to db
 router.post('/', controller.insert);
 router.post('/all/', controller.insertAllPositions);
+router.post('/updateAll/', controller.updateAllPositionsByDepartmentId);
 
 router.post('/allPositions/', controller.getPositionsByIdList);
 

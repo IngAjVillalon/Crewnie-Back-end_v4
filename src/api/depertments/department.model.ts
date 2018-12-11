@@ -14,6 +14,9 @@ export const Depertment = new Schema({
     preProduction: [ String ],
     production: [ String ],
     postProduction: [ String ],
+    preProductionPositions: { type: Object },
+    productionPositions: { type: Object },
+    postProductionPositions: { type: Object },
 
     createdAt: { type: Date, default: Date.now },
     createdBy: { type: ObjectId, ref: 'User' },

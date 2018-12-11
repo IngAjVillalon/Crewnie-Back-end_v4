@@ -5,6 +5,7 @@ var ObjectId = mongoose_1.Schema.Types.ObjectId;
 exports.Position = new mongoose_1.Schema({
     projectId: { type: String },
     departmentId: { type: String },
+    departmentState: { type: String },
     index: { type: Number },
     title: { type: String },
     location: { type: String },
@@ -13,6 +14,8 @@ exports.Position = new mongoose_1.Schema({
     salaryMax: { type: Number },
     duration: { type: String },
     vacancy: { type: Number },
+    selected: { type: Number },
+    selectedMembers: { type: Object },
     startDate: { type: Date },
     endDate: { type: Date },
     createdAt: { type: Date, "default": Date.now },

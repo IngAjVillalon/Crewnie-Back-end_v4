@@ -9,6 +9,7 @@ var auth = new auth_service_1["default"]();
 // Add project to db
 router.post('/', controller.insert);
 router.post('/all/', controller.insertAllPositions);
+router.post('/updateAll/', controller.updateAllPositionsByDepartmentId);
 router.post('/allPositions/', controller.getPositionsByIdList);
 // Get All Projects
 router.get('/', controller.getDepertments);

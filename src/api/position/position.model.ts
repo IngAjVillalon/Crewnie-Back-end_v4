@@ -5,6 +5,7 @@ const ObjectId = Schema.Types.ObjectId;
 export const Position = new Schema({
     projectId: { type: String },
     departmentId: { type: String },
+    departmentState: { type: String },
     index: { type: Number },
     title: { type: String },
     location: { type: String },
@@ -13,6 +14,8 @@ export const Position = new Schema({
     salaryMax: { type: Number },
     duration: { type: String},
     vacancy: { type: Number },
+    selected: { type: Number },
+    selectedMembers: { type: Object },
     startDate: { type: Date },
     endDate: { type: Date },
 

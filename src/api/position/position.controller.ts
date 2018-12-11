@@ -125,4 +125,22 @@ export default class ProjectCtrl extends BaseCtrl {
             .then(this.respondWithResult(res))
             .catch(this.handleError(res));
     }
+
+    updateAllPositionsByDepartmentId = (req, res) => {
+        let positions = req.body;
+        let positionIds = [];
+        positions.forEach(element => {
+            positionIds.push(element._id);
+            Position.update({"_id": element._id}, element, ()=>{});
+        });
+        res.send('return');
+        console.log(positionIds);
+
+        // Position.updateMany({"_id": { $in: positionIds}}, positions, { multi: true }).exec().then(this.respondWithResult(res));
+
+        // Position.updateMany({}, positions)
+        // .exec()
+        // .then(this.respondWithResult(res))
+        // .catch(this.handleError(res));
+    }
 }
